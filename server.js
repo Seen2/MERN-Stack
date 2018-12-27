@@ -7,13 +7,11 @@ const users=require('./routes/api/users');
 const posts=require('./routes/api/posts');
 const profile=require('./routes/api/profile');
 
-//console.log(JSON.stringify(URI));
-
-
 mongoose.connect(URI, { useNewUrlParser: true })
-
-
 const app=express();
+
+app.use(bodyParser.urlencoded({extended:true})); //used for post request to get body in request
+app.use(bodyParser.json());
 
 app.get('/',(req,res)=>{
 	res.send('hello');
