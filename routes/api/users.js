@@ -6,15 +6,23 @@ const bcrypt=require('bcryptjs');
 const {Users}=require('../../model/users');
 
 const router=express.Router();
+// @route   GET api/users/test
+// @desc    Tests users route
+// @access  Public
 
 router.get('/test',(req,res)=> {
 	res.json({"msg":"Working fine"});
 	console.log(Users);
 })
+
+// @route   GET api/users/register
+// @desc    Tests users route
+// @access  Public
+
 router.post('/register',(req,res)=>{
 	Users.findOne({email:req.body.email},(err,user)=>{
 		if(!user){
-			const avatar = gravatar.url(req.body.email, {s: '200', r: 'pg', d: '404'}); //using gravatar library for avatar
+			const avatar = gravatar.url(req.body.email, {s: '200', r: 'pg', d: 'mm'}); //using gravatar library for avatar
 			const newUser=new Users({   //creating user via mongo Users model
 				name:req.body.name,
 				email:req.body.email,
