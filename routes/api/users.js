@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
-const { Users } = require("../../model/users");
+const { User } = require("../../model/user");
 const { secretOrkey } = require("../../config/keys");
 const { validateRegisterInput } = require("../../validation/registor");
 const { validateLoginInput } = require("../../validation/login");
@@ -16,7 +16,7 @@ const router = express.Router();
 
 router.get("/test", (req, res) => {
   res.json({ msg: "Working fine" });
-  console.log(Users);
+  console.log(User);
 });
 
 // @route   GET api/users/register
@@ -29,15 +29,15 @@ router.post("/register", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   } else {
-    Users.findOne({ email: req.body.email }, (err, user) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
       if (!user) {
         const avatar = gravatar.url(req.body.email, {
           s: "200",
           r: "pg",
           d: "mm"
         }); //using gravatar library for avatar
-        const newUser = new Users({
-          //creating user via mongo Users model
+        const newUser = new User({
+          //creating user via mongo User model
           name: req.body.name,
           email: req.body.email,
           password: req.body.password,
@@ -74,7 +74,7 @@ router.post("/login", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  Users.findOne({ email }).then(user => {
+  User.findOne({ email }).then(user => {
     if (!user) {
       errors.email = "User not found";
       res.status(404).json(errors);

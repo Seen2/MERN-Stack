@@ -24,7 +24,7 @@ const profileSchema = new mongoose.Schema({
     require: true
   },
   skills: {
-    type: [Strings],
+    type: [String],
     required: true
   },
   bio: {
@@ -54,7 +54,7 @@ const profileSchema = new mongoose.Schema({
         type: Date
       },
       current: {
-        type: boolean,
+        type: Boolean,
         default: false
       },
       decription: {
@@ -84,7 +84,7 @@ const profileSchema = new mongoose.Schema({
         type: Date
       },
       current: {
-        type: boolean,
+        type: Boolean,
         default: false
       },
       decription: {
@@ -116,5 +116,5 @@ const profileSchema = new mongoose.Schema({
 });
 
 module.exports = {
-  profile: mongoose.model("profile", profileSchema)
+  Profile: mongoose.model("profile", profileSchema)
 };
