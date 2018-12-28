@@ -1,7 +1,7 @@
-const express=require('express');
+const express = require("express");
 
-const router=express.Router();
+const router = express.Router();
 
-router.get('/test',(req,res)=> res.json({"msg":"Working fine"}));
+router.get("/test", (req, res) => res.json({ msg: "Working fine" }));
 
-module.exports=router;
+module.exports = router;

@@ -4,8 +4,8 @@
   "description": "Social Media",
   "main": "server.js",
   "scripts": {
-		"start": "node server.js",
-		"serve":"nodemon server.js"
+    "start": "node server.js",
+    "serve": "sudo service mongod start;sleep 5;nodemon server.js"
   },
   "repository": {
     "type": "git",
