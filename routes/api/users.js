@@ -3,9 +3,12 @@ const mongoose = require("mongoose");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 const { Users } = require("../../model/users");
 const { secretOrkey } = require("../../config/keys");
+const { validateRegisterInput } = require("../../validation/registor");
+const { validateLoginInput } = require("../../validation/login");
 
 const router = express.Router();
 // @route   GET api/users/test
@@ -22,47 +25,60 @@ router.get("/test", (req, res) => {
 // @access  Public
 
 router.post("/register", (req, res) => {
-  Users.findOne({ email: req.body.email }, (err, user) => {
-    if (!user) {
-      const avatar = gravatar.url(req.body.email, {
-        s: "200",
-        r: "pg",
-        d: "mm"
-      }); //using gravatar library for avatar
-      const newUser = new Users({
-        //creating user via mongo Users model
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        avatar
-      });
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) {
-            console.log(err);
-          } else {
-            newUser.password = hash;
-            newUser.save((err, user) => {
-              if (err) {
-                console.log(err);
-              } else {
-                res.json(user);
-              }
-            });
-          }
+  const { errors, isValid } = validateRegisterInput(req.body);
+  //check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  } else {
+    Users.findOne({ email: req.body.email }, (err, user) => {
+      if (!user) {
+        const avatar = gravatar.url(req.body.email, {
+          s: "200",
+          r: "pg",
+          d: "mm"
+        }); //using gravatar library for avatar
+        const newUser = new Users({
+          //creating user via mongo Users model
+          name: req.body.name,
+          email: req.body.email,
+          password: req.body.password,
+          avatar
         });
-      });
-    } else {
-      res.status(400).json(user);
-    }
-  });
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) {
+              console.log(err);
+            } else {
+              newUser.password = hash;
+              newUser.save((err, user) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.json(user);
+                }
+              });
+            }
+          });
+        });
+      } else {
+        errors.email = "Email already exist";
+        res.status(400).json(errors);
+      }
+    });
+  }
 });
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
+  const { errors, isValid } = validateLoginInput(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   Users.findOne({ email }).then(user => {
     if (!user) {
-      res.status(404).json({ email: "Users not found" });
+      errors.email = "User not found";
+      res.status(404).json(errors);
     } else {
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
@@ -75,15 +91,27 @@ router.post("/login", (req, res) => {
           //asign token
           jwt.sign(payload, secretOrkey, { expiresIn: 3600 }, (err, token) => {
             if (!err) {
-              res.json({ msg: "sucess", token: "Bearer " + token });
+              res.json({ sucess: true, token: "Bearer " + token });
             }
           });
         } else {
-          return res.status(400).json({ msg: "Incorect password" });
+          errors.password = "Password Incorrect";
+          return res.status(400).json(errors);
         }
       });
     }
   });
 });
 
+// @route   GET api/users/current
+// @desc    Return current user
+// @access  Private
+
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json(req.user);
+  }
+);
 module.exports = router;
