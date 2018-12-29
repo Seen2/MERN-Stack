@@ -122,7 +122,7 @@ router.post(
               if (
                 post.likes.filter(
                   like => like.user.toString() === req.user.id.length
-                ) <= 0
+                ) < 0
               ) {
                 return res
                   .status(400)
@@ -144,10 +144,6 @@ router.post(
       });
   }
 );
-
-// @route   POST api/posts/unlike/:id
-// @desc    UnLike post
-// @access  Private
 
 // @route   POST api/posts/unlike/:id
 // @desc    Unlike post
