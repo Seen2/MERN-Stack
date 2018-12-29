@@ -8,6 +8,8 @@ const { Profile } = require("../../model/profile");
 
 //load users profile
 const { User } = require("../../model/user");
+//Load validation
+const { validateProfileInput } = require("../../validation/profile");
 
 // @route   GET api/users/test
 // @desc    Tests users route
@@ -26,6 +28,7 @@ router.get(
   (req, res) => {
     const errors = {};
     Profile.findOne({ user: req.user.id })
+      .populate("user", ["name", "email", "avatar"]) //from user with email name and password
       .then(profile => {
         if (!profile) {
           errors.noprofile = "No Profile for this user";
@@ -45,6 +48,13 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   //with the token provided passport will put user in to req
   (req, res) => {
+    const { errors, isValid } = validateProfileInput(req.body);
+    //check validations
+    if (!isValid) {
+      //return any errors with 400
+      return res.status(400).json(errors);
+    }
+
     const profileFeilds = {};
     profileFeilds.user = req.user.id;
 
@@ -58,7 +68,7 @@ router.post(
       profileFeilds.githubusername = req.body.githubusername;
     //skills - split into array
 
-    if (typeof req.body.skill !== "undefined") {
+    if (typeof req.body.skills !== "undefined") {
       profileFeilds.skills = req.body.skills.split(",");
     }
     //Social
@@ -69,24 +79,28 @@ router.post(
     if (req.body.instagram) profileFeilds.instagram = req.body.instagram;
     if (req.body.linkedin) profileFeilds.linkedin = req.body.linkedin;
 
-    Profile.findOne({ user: req.user.id }).then(peofile => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         //Update
         Profile.findOneAndUpdate(
-          { use: req.user.id },
+          { user: req.user.id },
           { $set: profileFeilds },
           { new: true }
-        ).then(profile => res.json(profile));
+        ).then(profile => {
+          console.log("err \n\n", profile);
+          return res.json(profile);
+        });
       } else {
         //Create
 
         //Check if handle exists
         Profile.findOne({ handle: profileFeilds.handle }).then(profile => {
           if (profile) {
-            errors.handle = "That handle already exists";
+            errors.handle = "That Profile already exists";
             res.status(400).json(errors);
           }
           // Save Profile
+
           new Profile(profileFeilds).save().then(profile => res.json(profile));
         });
       }
