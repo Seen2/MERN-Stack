@@ -50,7 +50,7 @@ const profileSchema = new mongoose.Schema({
         type: Date,
         required: true
       },
-      from: {
+      to: {
         type: Date
       },
       current: {
@@ -80,7 +80,7 @@ const profileSchema = new mongoose.Schema({
         type: Date,
         required: true
       },
-      from: {
+      to: {
         type: Date
       },
       current: {
