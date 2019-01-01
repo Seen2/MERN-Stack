@@ -6,6 +6,7 @@ export default function TextFieldGroup({
   name,
   placeholder,
   value,
+  label,
   error,
   info,
   type,

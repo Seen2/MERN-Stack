@@ -70,7 +70,6 @@ class Register extends Component {
                     info="This site uses Gravatar so if you want a profile image,
                       use a Gravatar email"
                   />
-
                   <TextFieldGroup
                     type="password"
                     error={errors.password}
@@ -79,7 +78,6 @@ class Register extends Component {
                     value={this.state.password}
                     onChange={this.onInputChange}
                   />
-
                   <TextFieldGroup
                     type="Confirm password"
                     error={errors.password2}
@@ -88,7 +86,6 @@ class Register extends Component {
                     value={this.state.password2}
                     onChange={this.onInputChange}
                   />
-
                   <input
                     type="submit"
                     className="btn btn-info btn-block mt-4"
