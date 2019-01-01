@@ -1,5 +1,10 @@
 import axios from "axios";
-import { PROFILE_LOADING, GET_PROFILE, CLEAR_CURRENT_PROFILE } from "./types";
+import {
+  PROFILE_LOADING,
+  GET_PROFILE,
+  CLEAR_CURRENT_PROFILE,
+  GET_ERRORS
+} from "./types";
 
 //Get Crrent profile
 export const getCurrentProfile = () => dispatch => {
@@ -13,6 +18,13 @@ export const getCurrentProfile = () => dispatch => {
         payload: {}
       });
     });
+};
+//Create Profile
+export const createProfile = (profile, history) => dispatch => {
+  axios
+    .post("/api/profile", profile)
+    .then(res => history.push("/dashboard"))
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 //Profile Loading
 export const setProfileLoading = () => {
