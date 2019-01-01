@@ -30,7 +30,7 @@ export class CreateProfile extends Component {
   }
   onSubmit = event => {
     event.preventDefault();
-    console.log("submited..");
+    console.log("is called");
   };
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -180,6 +180,7 @@ export class CreateProfile extends Component {
                 />
                 <div className="mb-3">
                   <button
+                    type="button"
                     onClick={() => {
                       this.setState(prevState => ({
                         displaySocialInputs: !prevState.displaySocialInputs
