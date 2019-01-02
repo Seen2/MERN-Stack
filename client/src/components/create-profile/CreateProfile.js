@@ -54,6 +54,7 @@ class CreateProfile extends Component {
     };
     this.props.createProfile(profileData, this.props.history);
   };
+
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -113,6 +114,7 @@ class CreateProfile extends Component {
         </div>
       );
     }
+
     // select options for status
     const options = [
       { label: "* SELECT PROFFESIONAL STATUS", value: 0 },
@@ -132,9 +134,9 @@ class CreateProfile extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Create Your Profile</h1>
               <p className="lead text-center">
-                Let's get some information to create your profile stand out
+                Let's get some information to make your profile stand out
               </p>
-              <small className="d-block pb-3"> *=required feilds</small>
+              <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
@@ -142,16 +144,16 @@ class CreateProfile extends Component {
                   value={this.state.handle}
                   onChange={this.onChange}
                   error={errors.handle}
-                  info="A unique name for your profile URL."
+                  info="A unique handle for your profile URL. Your full name, company name, nickname"
                 />
                 <SelectListGroup
-                  options={options}
                   placeholder="Status"
-                  name="staus"
+                  name="status"
                   value={this.state.status}
                   onChange={this.onChange}
+                  options={options}
                   error={errors.status}
-                  info="Give us a idea of what you are in your carrier"
+                  info="Give us an idea of where you are at in your career"
                 />
                 <TextFieldGroup
                   placeholder="Company"
@@ -159,7 +161,7 @@ class CreateProfile extends Component {
                   value={this.state.company}
                   onChange={this.onChange}
                   error={errors.company}
-                  info="Could be your own or one you work for"
+                  info="Could be your own company or one you work for"
                 />
                 <TextFieldGroup
                   placeholder="Website"
@@ -184,7 +186,7 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   error={errors.skills}
                   info="Please use comma separated values (eg.
-                    HTML,CSS,JavaScript,PHP)"
+                    HTML,CSS,JavaScript,PHP"
                 />
                 <TextFieldGroup
                   placeholder="Github Username"
@@ -202,6 +204,7 @@ class CreateProfile extends Component {
                   error={errors.bio}
                   info="Tell us a little about yourself"
                 />
+
                 <div className="mb-3">
                   <button
                     type="button"
@@ -215,13 +218,13 @@ class CreateProfile extends Component {
                     Add Social Network Links
                   </button>
                   <span className="text-muted">Optional</span>
-                  {socialInputs}
-                  <input
-                    type="submit"
-                    value="Submit"
-                    className="btn btn-info btn-block mt-4"
-                  />
                 </div>
+                {socialInputs}
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="btn btn-info btn-block mt-4"
+                />
               </form>
             </div>
           </div>
