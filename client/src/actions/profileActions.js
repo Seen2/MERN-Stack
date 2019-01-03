@@ -53,6 +53,17 @@ export const addExperience = (expData, history) => dispatch => {
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
+//Add education to profile
+export const addEducation = (eduData, history) => dispatch => {
+  axios
+    .post("/api/profile/education", eduData)
+    .then(res => {
+      history.push("/dashboard");
+      dispatch({ type: GET_ERRORS, payload: {} });
+    })
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
 //delete Account
 export const deleteAccount = () => dispatch => {
   if (window.confirm("Are you sure? \nThis can't be undo")) {
