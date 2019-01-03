@@ -4,6 +4,7 @@ const { isEmpty } = require("./is-empty");
 
 const validateProfileInput = data => {
   let errors = {};
+
   data.status = !isEmpty(data.status) ? data.status : "";
   data.handle = !isEmpty(data.handle) ? data.handle : "";
   data.skills = !isEmpty(data.skills) ? data.skills : "";
@@ -17,7 +18,7 @@ const validateProfileInput = data => {
   if (validator.isEmpty(data.status)) {
     errors.status = "Status feild is required";
   }
-  if (validator.isEmpty(data.skills)) {
+  if (isEmpty(data.skills)) {
     errors.skills = "Skills feild is required";
   }
   if (!isEmpty(data.website)) {

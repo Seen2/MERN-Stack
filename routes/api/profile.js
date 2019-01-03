@@ -51,10 +51,12 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   //with the token provided passport will put user in to req
   (req, res) => {
+    console.log(req.body);
     const { errors, isValid } = validateProfileInput(req.body);
     //check validations
     if (!isValid) {
       //return any errors with 400
+
       return res.status(400).json(errors);
     }
 
