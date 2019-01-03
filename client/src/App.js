@@ -17,7 +17,7 @@ import CreateProfile from "./components/create-profile/CreateProfile";
 import { clearCurrentProfile } from "./actions/profileActions";
 import PrivateRoute from "./components/common/PrivateRoute";
 import EditProfile from "./components/edit-profile/EditProfile";
-import { AddExperience } from "./components/add-credential/AddExperience";
+import AddExperience from "./components/add-credential/AddExperience";
 
 //check for authentication
 if (localStorage.jwtToken) {

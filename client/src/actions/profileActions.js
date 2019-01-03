@@ -16,7 +16,7 @@ export const getCurrentProfile = () => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_PROFILE,
-        payload: {}
+        payload: err.response.data
       });
     });
 };
@@ -41,6 +41,16 @@ export const clearCurrentProfile = () => {
   return {
     type: CLEAR_CURRENT_PROFILE
   };
+};
+//Add expeirence to profile
+export const addExperience = (expData, history) => dispatch => {
+  axios
+    .post("/api/profile/experience", expData)
+    .then(res => {
+      history.push("/dashboard");
+      dispatch({ type: GET_ERRORS, payload: {} });
+    })
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
 //delete Account
