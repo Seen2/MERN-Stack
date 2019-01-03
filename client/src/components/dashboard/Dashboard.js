@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import ProfileActions from "./ProfileActions";
+import Experience from "./Experience";
 
 export class Dashboard extends Component {
   static propTypes = {
@@ -36,7 +37,8 @@ export class Dashboard extends Component {
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
             <ProfileActions />
-            {/* TODO :exp and edu*/}
+            <Experience experience={profile.experience} />
+            {/* TODO : edu*/}
             <div style={{ marginBottom: "60px" }}>
               <button onClick={this.onDeleteClick} className="btn btn-danger">
                 Delete My Account

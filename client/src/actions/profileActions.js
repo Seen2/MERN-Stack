@@ -64,6 +64,16 @@ export const addEducation = (eduData, history) => dispatch => {
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
+//delete experience
+export const deleteExperience = id => dispatch => {
+  axios
+    .delete(`/api/profile/experience/:${id}`)
+    .then(res => {
+      dispatch({ type: GET_PROFILE, payload: res.data });
+    })
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
 //delete Account
 export const deleteAccount = () => dispatch => {
   if (window.confirm("Are you sure? \nThis can't be undo")) {
