@@ -54,12 +54,11 @@ router.delete(
   (req, res) => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        //console.log("\nerr \n \n");
-        //,my personal stuffs
+        //my personal stuffs
         if (mongoose.Types.ObjectId.isValid(req.params.id)) {
           Post.findById(req.params.id).then(post => {
             //check for post owner
-            //console.log("\nerr \n \n");
+
             if (post.user.toString() !== req.user.id) {
               res.status(401).json({ notauthorized: "User not authorized" });
             }
@@ -114,7 +113,6 @@ router.post(
   (req, res) => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        //console.log("\nerr \n \n");
         //,my personal stuffs
         if (mongoose.Types.ObjectId.isValid(req.params.id)) {
           Post.findById(req.params.id)
@@ -154,7 +152,6 @@ router.post(
   (req, res) => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        //console.log("\nerr \n \n");
         //,my personal stuffs
         if (mongoose.Types.ObjectId.isValid(req.params.id)) {
           Post.findById(req.params.id).then(post => {

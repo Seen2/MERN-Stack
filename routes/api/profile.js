@@ -81,7 +81,6 @@ router.post(
     if (req.body.facebook) profileFeilds.social.facebook = req.body.facebook;
     if (req.body.instagram) profileFeilds.social.instagram = req.body.instagram;
     if (req.body.linkedin) profileFeilds.social.linkedin = req.body.linkedin;
-    console.log(profileFeilds);
 
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
@@ -188,7 +187,6 @@ router.post(
     }
 
     Profile.findOne({ user: req.user.id }).then(profile => {
-      //console.log("\n ", req.body, "\n ok..");
       const newExp = {
         title: req.body.title,
         company: req.body.company,
@@ -266,7 +264,7 @@ router.delete(
 );
 
 // @route   DELETE api/profile/education/:edu_id
-// @desc    Remove Experience from profile
+// @desc    Remove Educatio from profile
 // @access  Private
 
 router.delete(
