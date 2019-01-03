@@ -51,7 +51,6 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   //with the token provided passport will put user in to req
   (req, res) => {
-    console.log(req.body);
     const { errors, isValid } = validateProfileInput(req.body);
     //check validations
     if (!isValid) {
@@ -234,7 +233,7 @@ router.post(
         description: req.body.description
       };
       //Add to experience array
-      //console.log("\n ", req.body, "\n 238");
+
       profile.education.unshift(newEdu);
       profile.save().then(profile => {
         res.json(profile);

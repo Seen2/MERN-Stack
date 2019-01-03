@@ -45,7 +45,7 @@ export const clearCurrentProfile = () => {
 
 //delete Account
 export const deleteAccount = () => dispatch => {
-  if (window.confirm("Are you sure? \n this can't be undo")) {
+  if (window.confirm("Are you sure? \nThis can't be undo")) {
     axios
       .delete("/api/profile")
       .then(res => dispatch({ type: SET_CURRENT_USER, payload: {} }))
