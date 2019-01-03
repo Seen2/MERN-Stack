@@ -10,6 +10,7 @@ export class Experience extends Component {
   static propTypes = {
     deleteExperience: PropTypes.func.isRequired
   };
+
   onDeleteClick = id => {
     this.props.deleteExperience(id);
   };
