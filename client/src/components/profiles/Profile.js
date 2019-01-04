@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import Spinner from "../common/Spinner";
 import { getProfiles } from "../../actions/profileActions";
+import ProfileItem from "./ProfileItem";
 
 export class Profile extends Component {
   componentDidMount() {
@@ -22,7 +23,9 @@ export class Profile extends Component {
       profileItems = <Spinner />;
     } else {
       if (profiles.length > 0) {
-        profileItems = <h1>Profiles Here</h1>;
+        profileItems = profiles.map(profile => (
+          <ProfileItem key={profile._id} profile={profile} />
+        ));
       } else {
         profileItems = <h4>No Profiles yet...</h4>;
       }
@@ -33,7 +36,7 @@ export class Profile extends Component {
         <div className="container">
           <div className="Row">
             <div className="col-md-12">
-              <h1 className="display-4 text-center">Developer</h1>
+              <h1 className="display-4 text-center">Developers</h1>
               <p className="lead text-center">
                 Browse and Connect with developers
               </p>

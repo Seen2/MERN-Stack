@@ -19,6 +19,7 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import EditProfile from "./components/edit-profile/EditProfile";
 import AddExperience from "./components/add-credential/AddExperience";
 import AddEducation from "./components/add-credential/AddEducation";
+import Profile from "./components/profiles/Profile";
 
 //check for authentication
 if (localStorage.jwtToken) {
@@ -82,6 +83,7 @@ class App extends Component {
                   component={AddEducation}
                 />
               </Switch>
+              <Route exact path="/profiles" component={Profile} />
             </div>
             <Footer />
           </div>
