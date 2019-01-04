@@ -57,7 +57,7 @@ const profileSchema = new mongoose.Schema({
         type: Boolean,
         default: false
       },
-      decription: {
+      description: {
         type: String
       }
     }
@@ -87,7 +87,7 @@ const profileSchema = new mongoose.Schema({
         type: Boolean,
         default: false
       },
-      decription: {
+      description: {
         type: String
       }
     }

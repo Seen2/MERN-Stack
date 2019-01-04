@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Moment from "react-moment";
 
-//import  from "../../validation/is-empty";
+import Moment from "react-moment";
 
 export default class ProfileCreds extends Component {
   render() {
@@ -12,8 +10,8 @@ export default class ProfileCreds extends Component {
       <li key={exp._id} className="list-group-item">
         <h4>{exp.company}</h4>
         <p>
-          <Moment format="YYYY/MM/DD">{exp.from} </Moment>to
-          <Moment format="YYYY/MM/DD"> {exp.to || Date.now()} </Moment>
+          <Moment format="YYYY/MM/DD">{exp.from}</Moment> to{" "}
+          <Moment format="YYYY/MM/DD">{exp.to || Date.now()}</Moment>
         </p>
         <p>
           <strong>Position:</strong>
@@ -46,8 +44,8 @@ export default class ProfileCreds extends Component {
       <li key={edu._id} className="list-group-item">
         <h4>{edu.school}</h4>
         <p>
-          <Moment format="YYYY/MM/DD">{edu.from} </Moment> to
-          <Moment format="YYYY/MM/DD"> {edu.to || Date.now()} </Moment>
+          <Moment format="YYYY/MM/DD">{edu.from}</Moment> to{" "}
+          <Moment format="YYYY/MM/DD">{edu.to || Date.now()}</Moment>
         </p>
         <p>
           <strong>Degree:</strong>
@@ -94,8 +92,3 @@ export default class ProfileCreds extends Component {
     );
   }
 }
-
-ProfileCreds.propTypes = {
-  education: PropTypes.object.isRequired,
-  experience: PropTypes.object.isRequired
-};
