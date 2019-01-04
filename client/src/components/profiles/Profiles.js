@@ -6,7 +6,7 @@ import Spinner from "../common/Spinner";
 import { getProfiles } from "../../actions/profileActions";
 import ProfileItem from "./ProfileItem";
 
-export class Profile extends Component {
+export class Profiles extends Component {
   componentDidMount() {
     this.props.getProfiles();
   }
@@ -61,4 +61,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Profile);
+)(Profiles);
