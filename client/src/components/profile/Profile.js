@@ -8,7 +8,7 @@ import { getProfileByHandle } from "../../actions/profileActions";
 import ProfileHeader from "./ProfileHeader";
 import ProfileAbout from "./ProfileAbout";
 import ProfileCreds from "./ProfileCreds";
-import ProfileGithub from "./PofileGithub";
+import ProfileGithub from "./ProfileGithub";
 
 export class Profile extends Component {
   componentDidMount() {
@@ -44,7 +44,9 @@ export class Profile extends Component {
             education={profile.education}
             experience={profile.experience}
           />
-          <ProfileGithub />
+          {profile.githubusername ? (
+            <ProfileGithub username={profile.githubusername} />
+          ) : null}
         </div>
       );
     }
