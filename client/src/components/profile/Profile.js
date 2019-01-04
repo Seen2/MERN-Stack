@@ -17,6 +17,12 @@ export class Profile extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.profile.profile && this.props.profile.loading) {
+      this.props.history.push("/not-found");
+    }
+  }
+
   static propTypes = {
     getProfileByHandle: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired
