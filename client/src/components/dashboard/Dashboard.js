@@ -26,20 +26,25 @@ export class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
+
     let dashboardContent;
     if (profile === null || loading) {
       dashboardContent = <Spinner />;
     } else {
       //check if login user has profile data
-      if (Object.keys(profile).length > 0) {
+      if (Object.keys(profile).length > 1) {
         dashboardContent = (
           <div>
             <p className="lead text-muted">
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
             <ProfileActions />
-            <Experience experience={profile.experience} />
-            <Education education={profile.education} />
+            {profile.experience ? (
+              <Experience experience={profile.experience} />
+            ) : null}
+            {profile.education ? (
+              <Education education={profile.education} />
+            ) : null}
             <div style={{ marginBottom: "60px" }}>
               <button onClick={this.onDeleteClick} className="btn btn-danger">
                 Delete My Account
