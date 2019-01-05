@@ -46,41 +46,45 @@ export class PostItem extends Component {
           </div>
           <div className="col-md-10">
             <p className="lead">{post.text}</p>
-            <button
-              onClick={() => addLike(post._id)}
-              type="button"
-              className="btn btn-light mr-1"
-            >
-              <i
-                className={classnames("fas fa-thumbs-up", {
-                  "text-info ": this.findUserLike(post.likes)
-                })}
-              />
-              <span className="badge badge-light">{post.likes.length}</span>
-            </button>
-            <button
-              onClick={() => removeLike(post._id)}
-              type="button"
-              className="btn btn-light mr-1"
-            >
-              <i className="text-secondary fas fa-thumbs-down" />
-            </button>
             {showComment ? (
-              <Link to={`/posts/${post._id}`} className="btn btn-info mr-1">
-                Comments
-              </Link>
-            ) : null}
-            {post.user === auth.user.id ? (
-              <button
-                type="button"
-                onClick={() => {
-                  this.onDeleteClick(post._id);
-                }}
-                className="btn btn-danger mr-1"
-              >
-                <i className="fas fa-times" />
-                Delete
-              </button>
+              <div>
+                <button
+                  onClick={() => addLike(post._id)}
+                  type="button"
+                  className="btn btn-light mr-1"
+                >
+                  <i
+                    className={classnames("fas fa-thumbs-up", {
+                      "text-info ": this.findUserLike(post.likes)
+                    })}
+                  />
+                  <span className="badge badge-light">{post.likes.length}</span>
+                </button>
+                <button
+                  onClick={() => removeLike(post._id)}
+                  type="button"
+                  className="btn btn-light mr-1"
+                >
+                  <i className="text-secondary fas fa-thumbs-down" />
+                </button>
+
+                <Link to={`/posts/${post._id}`} className="btn btn-info mr-1">
+                  Comments
+                </Link>
+
+                {post.user === auth.user.id ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.onDeleteClick(post._id);
+                    }}
+                    className="btn btn-danger mr-1"
+                  >
+                    <i className="fas fa-times" />
+                    Delete
+                  </button>
+                ) : null}
+              </div>
             ) : null}
           </div>
         </div>
