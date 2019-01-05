@@ -53,7 +53,7 @@ export default class ProfileCreds extends Component {
         </p>
         <p>
           <strong>Field Of Study:</strong>
-          {edu.fieldofstudy}
+          {edu.feildofstudy}
         </p>
 
         <p>
