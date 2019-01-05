@@ -29,13 +29,25 @@ npm run client
 # Server runs on http://localhost:5000 and client on http://localhost:3000
 ```
 
-You will need to create a keys_dev.js in the server config folder with
+You will need to create a key.js in the server config folder with
 
 ```
 module.exports = {
-  mongoURI: 'YOUR_OWN_MONGO_URI',
+  URI: 'YOUR_OWN_MONGO_URI',
   secretOrKey: 'YOUR_OWN_SECRET'
 };
+```
+
+You need to register this application on github. to get clientId and secretId.
+[register here](https://github.com/settings/applications/new)
+
+You will need to create a key.js in the client utils folder.
+
+```
+export const clientId= <your_id>;
+export const secretId= <your_secret_id>;
+
+
 ```
 
 ## App Info
