@@ -29,7 +29,7 @@ export class PostItem extends Component {
   };
 
   render() {
-    const { post, auth, addLike, removeLike } = this.props;
+    const { post, auth, addLike, removeLike, showComment } = this.props;
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -65,9 +65,11 @@ export class PostItem extends Component {
             >
               <i className="text-secondary fas fa-thumbs-down" />
             </button>
-            <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
-              Comments
-            </Link>
+            {showComment ? (
+              <Link to={`/posts/${post._id}`} className="btn btn-info mr-1">
+                Comments
+              </Link>
+            ) : null}
             {post.user === auth.user.id ? (
               <button
                 type="button"
@@ -86,6 +88,10 @@ export class PostItem extends Component {
     );
   }
 }
+
+PostItem.defaultProps = {
+  showComment: true
+};
 
 const mapStateToProps = state => ({
   auth: state.auth
