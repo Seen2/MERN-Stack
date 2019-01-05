@@ -7,6 +7,7 @@ import Spinner from "../common/Spinner";
 import { getPost } from "../../actions/postActions";
 import PostItem from "../posts/PostItem";
 import CommentForm from "./CommentForm";
+import CommentFeed from "./CommentFeed";
 
 export class Post extends Component {
   componentDidMount() {
@@ -29,6 +30,7 @@ export class Post extends Component {
         <div>
           <PostItem post={post} showComment={false} />
           <CommentForm postId={post._id} />
+          <CommentFeed postId={post._id} comments={post.comments} />
         </div>
       );
     }
