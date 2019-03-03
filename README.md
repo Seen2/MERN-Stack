@@ -1,6 +1,6 @@
 # MERN-Stack
 
-Learning MERN stack from udemy by
+MERN stack Social Devloper apps by
 Brad Traversy
 [Traversy Media](http://www.traversymedia.com)
 
